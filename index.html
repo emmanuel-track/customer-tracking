@@ -1,0 +1,1546 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<title>Emmanuel's Fuel Tracking System</title>
+<meta name="description" content="Professional fuel inventory management — real-time stock, customer analytics, and business intelligence."/>
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="icon.svg"/>
+<link rel="apple-touch-icon" sizes="512x512" href="icon-512.png"/>
+
+<!-- Open Graph — WhatsApp, Facebook, Telegram, LinkedIn -->
+<meta property="og:title" content="Emmanuel's Fuel Tracking System"/>
+<meta property="og:description" content="Professional fuel inventory management — real-time stock deduction, customer analytics &amp; business intelligence."/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://georgeuew.github.io/emmanuel123/"/>
+<meta property="og:image" content="https://georgeuew.github.io/emmanuel123/og-image.png"/>
+<meta property="og:image:width" content="600"/>
+<meta property="og:image:height" content="315"/>
+<meta name="twitter:image" content="https://georgeuew.github.io/emmanuel123/og-image.png"/>
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Emmanuel's Fuel Tracking System"/>
+<meta name="twitter:description" content="Professional fuel inventory management — real-time stock, customer analytics &amp; business intelligence."/>
+<!-- PWA -->
+<link rel="manifest" href="manifest.json"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="Fuel Tracker"/>
+<meta name="msapplication-TileColor" content="#F97316"/>
+<meta name="theme-color" content="#F97316"/>
+
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css"/>
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+
+<!-- ══ PWA INSTALL BANNER ══ -->
+<div id="pwa-banner" role="banner" aria-label="Install App" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;padding:.85rem 1rem;background:#1a1a2e;border-top:1px solid rgba(249,115,22,.3);box-shadow:0 -8px 32px rgba(0,0,0,.35);align-items:center;gap:.85rem;-webkit-tap-highlight-color:transparent;">
+  <div style="width:46px;height:46px;background:#f97316;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 0 0 4px rgba(249,115,22,.2);"><img src="icon.svg" alt="Logo" class="logo-img"></div>
+  <div class="flex-1">
+    <div style="font-size:.82rem;font-weight:800;color:#fff;letter-spacing:-.02em;">Install Fuel Tracker</div>
+    <div style="font-size:.68rem;color:rgba(255,255,255,.5);margin-top:2px;">Add to home screen for the full app experience</div>
+  </div>
+  <div class="d-flex gap-5 flex-shrink0">
+    <button id="pwa-install-btn" style="background:#f97316;color:#fff;border:none;border-radius:8px;padding:.5rem .95rem;font-size:.78rem;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap;">Install App</button>
+    <button id="pwa-close-btn" aria-label="Dismiss" style="width:32px;height:32px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- ══ iOS INSTALL INSTRUCTIONS ══ -->
+<div id="pwa-ios" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9998;background:#1a1a2e;border-top:1px solid rgba(249,115,22,.3);border-radius:20px 20px 0 0;padding:1.25rem 1.25rem 2rem;box-shadow:0 -8px 40px rgba(0,0,0,.4);">
+  <button id="pwa-ios-close" style="position:absolute;top:1rem;right:1rem;width:28px;height:28px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <div class="d-flex align-center gap-75 mb-1">
+    <div style="width:46px;height:46px;background:#f97316;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><img src="icon.svg" alt="Logo" class="logo-img"></div>
+    <div>
+      <div style="font-size:.88rem;font-weight:800;color:#fff;">Install Fuel Tracker</div>
+      <div style="font-size:.72rem;color:rgba(255,255,255,.5);margin-top:2px;">Add this app to your iPhone home screen</div>
+    </div>
+  </div>
+  <div class="d-flex flex-col gap-65">
+    <div class="d-flex align-center gap-75">
+      <div style="width:26px;height:26px;background:#f97316;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:800;color:#fff;flex-shrink:0;">1</div>
+      <div style="font-size:.75rem;color:rgba(255,255,255,.75);line-height:1.4;">Tap the <strong class="c-white">Share</strong> button at the bottom of Safari ⎙</div>
+    </div>
+    <div class="d-flex align-center gap-75">
+      <div style="width:26px;height:26px;background:#f97316;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:800;color:#fff;flex-shrink:0;">2</div>
+      <div style="font-size:.75rem;color:rgba(255,255,255,.75);line-height:1.4;">Scroll down and tap <strong class="c-white">"Add to Home Screen"</strong></div>
+    </div>
+    <div class="d-flex align-center gap-75">
+      <div style="width:26px;height:26px;background:#f97316;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:800;color:#fff;flex-shrink:0;">3</div>
+      <div style="font-size:.75rem;color:rgba(255,255,255,.75);line-height:1.4;">Tap <strong class="c-white">"Add"</strong> — the app icon will appear on your home screen</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ LOADING OVERLAY ══ -->
+<div id="loading-overlay" style="
+  position:fixed;inset:0;background:var(--surface);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  z-index:9999;gap:1rem;
+">
+  <div style="
+    width:44px;height:44px;background:var(--brand);border-radius:12px;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 0 0 8px rgba(249,115,22,.15);
+    animation:pulse 1.4s ease-in-out infinite;
+  ">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 2C12 2 5 9 5 14a7 7 0 0 0 14 0c0-5-7-12-7-12z"/>
+    </svg>
+  </div>
+  <div style="font-size:.8rem;font-weight:600;color:var(--t3);letter-spacing:.04em;text-transform:uppercase">Loading…</div>
+  <div id="loading-error" style="display:none;font-size:.75rem;color:#EF4444;padding:0 2rem;text-align:center;max-width:320px;line-height:1.5"></div>
+</div>
+<style>
+@keyframes pulse {
+  0%,100%{box-shadow:0 0 0 8px rgba(249,115,22,.15);}
+  50%{box-shadow:0 0 0 16px rgba(249,115,22,.04);}
+}
+</style>
+
+<!-- ══════════════════ LOGIN ══════════════════ -->
+<div id="login-screen" class="login-wrap">
+  <div class="login-panel">
+    <div class="lp-top">
+      <div class="lp-brand">
+        <div class="lp-brand-icon" class="overflow-h"><img src="icon.svg" alt="Logo" class="logo-img"></div>
+        <div class="lp-brand-name">Emmanuel's Tracking System</div>
+      </div>
+      <div class="lp-headline">Track every <span class="accent">litre.</span><br/>Know every customer.</div>
+      <div class="lp-desc">Professional fuel inventory management. Real-time stock deduction, customer purchase percentages, and complete business intelligence.</div>
+      <div class="lp-features">
+        <div class="lp-feat">
+          <div class="lp-feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div>
+          <div class="lp-feat-title">Smart Inventory</div>
+          <div class="lp-feat-desc">Auto-deducts per sale with % of total tracking</div>
+        </div>
+        <div class="lp-feat">
+          <div class="lp-feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+          <div class="lp-feat-title">Customer Profiles</div>
+          <div class="lp-feat-desc">Full history, fuel split & purchase analytics</div>
+        </div>
+        <div class="lp-feat">
+          <div class="lp-feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+          <div class="lp-feat-title">Live KPI Dashboard</div>
+          <div class="lp-feat-desc">Date-range KPIs, charts & top customers</div>
+        </div>
+        <div class="lp-feat">
+          <div class="lp-feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+          <div class="lp-feat-title">Audit Log + Receipts</div>
+          <div class="lp-feat-desc">Every action tracked, printable receipts</div>
+        </div>
+      </div>
+    </div>
+    <div class="lp-bottom">© 2026 Emmanuel's Fuel Tracking System. Built by <a href="https://www.instagram.com/eunographix_studio/" target="_blank" rel="noopener noreferrer" style="color:var(--brand);text-decoration:none;font-weight:600">eunographix</a></div>
+  </div>
+  <div class="login-form-side">
+    <div class="login-box">
+
+      <!-- MOBILE BRAND HEADER (visible only on mobile) -->
+      <div class="mobile-brand-header" style="display:none">
+        <div class="mobile-brand-icon" class="overflow-h"><img src="icon.svg" alt="Logo" class="logo-img"></div>
+        <div class="mobile-brand-text">
+          <div class="mb-name">Emmanuel's</div>
+          <div class="mb-sub">Fuel Tracking System</div>
+        </div>
+      </div>
+
+      <!-- SIGN IN -->
+      <div id="auth-signin">
+        <div class="login-box-eyebrow">Secure Access</div>
+        <h1 class="login-box-title">Welcome back</h1>
+        <p class="login-box-sub">Sign in to your fuel management dashboard</p>
+        <form id="login-form" novalidate>
+          <div class="form-field">
+            <label class="form-label" for="l-user">Email Address</label>
+            <input class="form-input" type="email" id="l-user" placeholder="Enter your email" autocomplete="email"/>
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="l-pass">Password</label>
+            <div class="pw-wrap">
+              <input class="form-input" type="password" id="l-pass" placeholder="Enter password" autocomplete="current-password"/>
+              <button type="button" class="pw-toggle" id="l-pass-toggle" aria-label="Toggle password visibility">
+                <svg class="eye-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                <svg class="eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+              </button>
+            </div>
+          </div>
+          <div id="l-err" class="login-err">Incorrect username or password.</div>
+          <button type="submit" class="btn btn-primary btn-full">Sign In</button>
+        </form>
+        <div class="auth-toggle">Don't have an account? <a id="go-register">Create one</a></div>
+      </div>
+
+      <!-- REGISTER -->
+      <div id="auth-register" style="display:none">
+        <div class="login-box-eyebrow">New Account</div>
+        <h1 class="login-box-title">Create account</h1>
+        <p class="login-box-sub">Join Emmanuel's Fuel Tracking System as staff</p>
+        <form id="reg-form" novalidate>
+          <div class="form-field">
+            <label class="form-label" for="r-display">Full Name *</label>
+            <input class="form-input" type="text" id="r-display" placeholder="e.g. Kwame Mensah" autocomplete="name"/>
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="r-uname">Email Address *</label>
+            <input class="form-input" type="email" id="r-uname" placeholder="e.g. kwame@example.com" autocomplete="email"/>
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="r-pwd">Password *</label>
+            <div class="pw-wrap">
+              <input class="form-input" type="password" id="r-pwd" placeholder="Min. 6 characters"/>
+              <button type="button" class="pw-toggle" id="r-pwd-toggle" aria-label="Toggle password visibility">
+                <svg class="eye-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                <svg class="eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+              </button>
+            </div>
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="r-cpwd">Confirm Password *</label>
+            <div class="pw-wrap">
+              <input class="form-input" type="password" id="r-cpwd" placeholder="Repeat password"/>
+              <button type="button" class="pw-toggle" id="r-cpwd-toggle" aria-label="Toggle confirm password visibility">
+                <svg class="eye-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                <svg class="eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+              </button>
+            </div>
+          </div>
+          <!-- Staff notice -->
+          <div class="info-note">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--t4)" stroke-width="2" stroke-linecap="round" style="width:15px;height:15px;flex-shrink:0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <span style="font-size:.75rem;color:var(--t4)">New accounts are created as <strong class="c-t2">Staff</strong>. The Admin can upgrade your role.</span>
+          </div>
+          <input type="hidden" id="r-role" value="staff"/>
+          <div id="reg-err" class="login-err"></div>
+          <button type="submit" class="btn btn-primary btn-full">Create Account</button>
+        </form>
+        <div class="auth-toggle">Already have an account? <a id="go-signin">Sign in</a></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ APP ══════════════════ -->
+<div id="app" class="shell" style="display:none">
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <button class="topbar-menu" id="menu-btn" aria-label="Menu">
+      <svg class="burger-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line class="burger-top"    x1="3" y1="6"  x2="21" y2="6"/>
+        <line class="burger-mid"    x1="3" y1="12" x2="21" y2="12"/>
+        <line class="burger-bottom" x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+    <!-- Desktop brand logo -->
+    <div class="topbar-brand" id="topbar-brand">
+      <div class="topbar-logo"><img src="icon.svg" alt="Logo" class="logo-img"></div>
+      <div class="topbar-brand-text">
+        <div class="topbar-brand-name">Emmanuel's</div>
+        <div class="topbar-brand-sub">Fuel Tracking System</div>
+      </div>
+    </div>
+    <div class="topbar-divider"></div>
+    <span class="topbar-title" id="topbar-title">Dashboard</span>
+    <div class="topbar-right">
+      <!-- Notification Bell -->
+      <div class="notif-wrap" id="notif-wrap">
+        <button class="notif-btn" id="notif-btn" aria-label="Notifications" title="Notifications">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span class="notif-badge hidden" id="notif-badge">0</span>
+        </button>
+        <div class="notif-panel" id="notif-panel">
+          <div class="notif-panel-hd">
+            <span class="notif-panel-title">Notifications</span>
+            <button class="notif-clear-btn" id="notif-clear-btn">Clear all</button>
+          </div>
+          <div class="notif-list" id="notif-list">
+            <div class="notif-empty">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+              No notifications
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="icon-btn" id="theme-btn" aria-label="Toggle theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <div class="user-chip" id="user-chip" onclick="A.nav('settings')" title="Settings">
+        <div class="user-av" id="user-av">EM</div>
+        <span class="user-chip-name" id="user-chip-name">Admin</span>
+      </div>
+      <button class="icon-btn" id="logout-btn" title="Sign out" class="c-t3">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- SIDEBAR -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <!-- Close button (mobile only) -->
+      <div class="sb-close" id="sb-close-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </div>
+      <!-- Brand row -->
+      <div class="sb-brand-row">
+        <div class="sb-icon" class="overflow-h"><img src="icon.svg" alt="Logo" class="logo-img"></div>
+        <div>
+          <div class="sb-name">Emmanuel's</div>
+          <div class="sb-sub">Fuel Tracking System</div>
+        </div>
+      </div>
+      <!-- User profile card -->
+      <div class="sb-user-card" onclick="A.nav('settings'); document.getElementById('app').classList.remove('nav-open');">
+        <div class="sb-user-av" id="sb-user-av">EM</div>
+        <div class="sb-user-info">
+          <div class="sb-user-name" id="sb-user-name">Loading…</div>
+          <div class="sb-user-role" id="sb-user-role">Staff</div>
+        </div>
+        <div class="sb-user-chevron">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-body">
+      <div class="nav-section">
+        <div class="nav-label">Overview</div>
+        <div class="nav-item active" data-page="dashboard">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+          Dashboard
+        </div>
+        <div class="nav-item" data-page="inventory">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          Fuel Inventory
+        </div>
+      </div>
+      <div class="nav-section">
+        <div class="nav-label">Operations</div>
+        <div class="nav-item" data-page="customers">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Customers
+        </div>
+        <div class="nav-item" data-page="record">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+          Record Purchase
+        </div>
+      </div>
+      <div class="nav-section">
+        <div class="nav-label">Reports</div>
+        <div class="nav-item" data-page="monthly">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Monthly Report
+        </div>
+        <div class="nav-item" data-page="yearly">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          Yearly Report
+        </div>
+        <div class="nav-item" data-page="history">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Purchase History
+        </div>
+        <div class="nav-item" data-page="audit">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          Audit Log
+        </div>
+      </div>
+      <div class="nav-section">
+        <div class="nav-label">Account</div>
+        <div class="nav-item" data-page="settings">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+          Settings
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="d-flex flex-col gap-18">
+        <span style="font-size:.65rem;color:var(--t5)">© 2026 Emmanuel's Fuel Tracking System</span>
+        <a href="https://www.instagram.com/eunographix_studio/" target="_blank" rel="noopener noreferrer" style="font-size:.63rem;color:var(--t4);text-decoration:none;display:flex;align-items:center;gap:.3rem;transition:color .2s" onmouseover="this.style.color='var(--brand)'" onmouseout="this.style.color='var(--t4)'"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="pointer-none"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>Built by eunographix</a>
+      </div>
+      <button class="sb-logout-btn" id="sb-logout-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Sign Out
+      </button>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="page-wrap">
+
+      <!-- DASHBOARD -->
+      <div id="page-dashboard" class="page active">
+        <div class="ph">
+          <div>
+            <div class="ph-title">Dashboard</div>
+            <div class="ph-sub" id="d-range-label">Fuel operations overview</div>
+          </div>
+          <div class="ph-right">
+            <div class="date-range">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <input type="date" id="d-from"/>
+              <span>—</span>
+              <input type="date" id="d-to"/>
+            </div>
+            <div class="dash-action-row">
+              <button class="btn btn-secondary btn-sm" id="d-reset">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="icon-xs"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.13"/></svg>
+                Reset
+              </button>
+              <button class="btn btn-primary btn-sm" onclick="A.nav('record')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                New Sale
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="kpi-grid" id="d-kpis"></div>
+        <div class="charts-grid">
+          <div class="card" class="m-0">
+            <div class="card-hd"><span class="card-title">Fuel Mix</span></div>
+            <div class="donut-wrap" id="d-donut-wrap">
+              <div class="donut-ring"><canvas id="d-donut" width="130" height="130"></canvas>
+                <div class="donut-center"><div class="donut-val" id="d-dval">—</div><div class="donut-lbl">Total Litres</div></div>
+              </div>
+              <div class="donut-legend" id="d-dleg"></div>
+            </div>
+          </div>
+          <div class="card" class="m-0">
+            <div class="card-hd"><span class="card-title">Sales Trend</span></div>
+            <div class="card-body" class="pt-5"><div class="chart-box"><canvas id="d-trend"></canvas></div></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-hd">
+            <div><div class="card-title">Top Customers</div><div class="card-subtitle">By revenue this period</div></div>
+            <button class="btn btn-ghost btn-sm" onclick="A.nav('customers')">View all →</button>
+          </div>
+          <div class="tbl-wrap">
+            <table class="tbl">
+              <thead><tr><th>#</th><th>Customer</th><th>Vehicle</th><th>Petrol (L)</th><th>Petrol %</th><th>Diesel (L)</th><th>Diesel %</th><th>Total (L)</th><th>Revenue</th></tr></thead>
+              <tbody id="d-top"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- INVENTORY -->
+      <div id="page-inventory" class="page">
+        <div class="ph">
+          <div>
+            <div class="ph-title">Fuel Inventory</div>
+            <div class="ph-sub">Monitor stock levels — purchases auto-deduct in real time</div>
+          </div>
+          <div class="ph-right">
+            <button class="btn btn-primary btn-sm admin-only" id="add-inv-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Add Delivery
+            </button>
+          </div>
+        </div>
+        <div class="inv-grid" id="inv-cards"></div>
+        <div class="card">
+          <div class="card-hd"><span class="card-title">Delivery History</span></div>
+          <div class="tbl-wrap">
+            <table class="tbl">
+              <thead><tr><th>Date</th><th>Fuel</th><th>Litres Added</th><th>Supplier</th><th>Notes</th><th></th></tr></thead>
+              <tbody id="inv-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- CUSTOMERS -->
+      <div id="page-customers" class="page">
+        <div class="ph">
+          <div>
+            <div class="ph-title">Customers</div>
+            <div class="ph-sub">Manage customer registry and view fuel analytics</div>
+          </div>
+          <div class="ph-right">
+            <button class="btn btn-secondary btn-sm" id="exp-cust-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Export
+            </button>
+            <button class="btn btn-primary btn-sm admin-only" id="add-cust-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Add Customer
+            </button>
+          </div>
+        </div>
+        <!-- Debtors Summary -->
+        <div id="debtors-summary" class="debtors-card" style="display:none">
+          <div class="flex-1">
+            <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--danger);margin-bottom:.35rem"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px;vertical-align:-2px"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Outstanding Balances</div>
+            <div style="font-size:.78rem;color:var(--t3)">Some customers have unpaid balances. Click a customer to record payment.</div>
+          </div>
+          <div class="debtors-stat"><div class="debtors-stat-val" id="ds-count" class="c-danger">0</div><div class="debtors-stat-lbl">Debtors</div></div>
+          <div class="debtors-stat"><div class="debtors-stat-val" id="ds-total" class="c-danger">—</div><div class="debtors-stat-lbl">Total Owed</div></div>
+          <div class="debtors-stat"><div class="debtors-stat-val" id="ds-credit" class="c-success">—</div><div class="debtors-stat-lbl">Total Credit</div></div>
+        </div>
+        <div class="filter-row">
+          <div class="search-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="search" class="form-input" id="c-search" placeholder="Search name, vehicle, phone…"/>
+          </div>
+          <select class="filter-select" id="c-fuel-f">
+            <option value="">All Types</option>
+            <option value="Petrol">Petrol Buyers</option>
+            <option value="Diesel">Diesel Buyers</option>
+          </select>
+          <select class="filter-select" id="c-balance-f">
+            <option value="">All Balances</option>
+            <option value="debt">Debtors Only</option>
+            <option value="credit">Credit Only</option>
+          </select>
+          <button class="btn btn-ghost btn-sm" id="c-reset-btn">Reset</button>
+        </div>
+        <div class="card" class="mb-0">
+          <div class="tbl-wrap">
+            <table class="tbl">
+              <thead><tr><th>#</th><th>Customer</th><th>Vehicle</th><th>Phone</th><th>Petrol (L)</th><th>Diesel (L)</th><th>Total Fuel</th><th>% of Stock</th><th>Revenue</th><th>Balance</th><th>Last Visit</th><th></th></tr></thead>
+              <tbody id="c-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="pager" id="c-pager"></div>
+      </div>
+
+      <!-- RECORD PURCHASE -->
+      <div id="page-record" class="page">
+        <div class="ph">
+          <div>
+            <div class="ph-title">Record Purchase</div>
+            <div class="ph-sub">Log a sale — inventory auto-deducts and % calculated instantly</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-hd"><span class="card-title">Sale Details</span></div>
+          <div class="card-body">
+            <form id="rec-form" novalidate>
+              <div class="fg" class="mb-75">
+                <div>
+                  <label class="form-label">Customer *</label>
+                  <select class="form-input" id="r-cust" required><option value="">— Select —</option></select>
+                </div>
+                <div>
+                  <label class="form-label">Date *</label>
+                  <input class="form-input" type="date" id="r-date" required/>
+                </div>
+                <div>
+                  <label class="form-label">Fuel Type *</label>
+                  <div class="fuel-toggle">
+                    <button type="button" class="ft-btn p-active" id="ft-p">Petrol</button>
+                    <button type="button" class="ft-btn" id="ft-d">Diesel</button>
+                  </div>
+                  <input type="hidden" id="r-fuel" value="Petrol"/>
+                </div>
+                <div>
+                  <label class="form-label">Litres *</label>
+                  <input class="form-input" type="number" id="r-litres" min="0.01" step="0.01" placeholder="e.g. 40.00" required/>
+                </div>
+                <div>
+                  <label class="form-label">Price per Litre *</label>
+                  <input class="form-input" type="number" id="r-ppl" min="0.01" step="0.01" placeholder="e.g. 14.50" required/>
+                </div>
+                <div>
+                  <label class="form-label">Total Amount</label>
+                  <input class="form-input" id="r-total" readonly placeholder="Auto-calculated"/>
+                </div>
+              </div>
+              <div style="max-width:420px;margin-bottom:.75rem">
+                <label class="form-label">Notes</label>
+                <textarea class="form-input" id="r-notes" placeholder="Optional notes…" rows="2"></textarea>
+              </div>
+              <div id="inv-warn" class="alert alert-warn" style="display:none">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                <span id="inv-warn-msg"></span>
+              </div>
+              <div class="preview-box" id="rec-preview">
+                <div class="preview-title">Purchase Preview</div>
+                <div class="preview-grid">
+                  <div><div class="preview-item-lbl">Customer</div><div class="preview-item-val" id="pv-cust">—</div></div>
+                  <div><div class="preview-item-lbl">Date</div><div class="preview-item-val" id="pv-date">—</div></div>
+                  <div><div class="preview-item-lbl">Fuel Type</div><div class="preview-item-val" id="pv-fuel">—</div></div>
+                  <div><div class="preview-item-lbl">Litres</div><div class="preview-item-val" id="pv-litres">—</div></div>
+                  <div><div class="preview-item-lbl">Price / Litre</div><div class="preview-item-val" id="pv-ppl">—</div></div>
+                  <div><div class="preview-item-lbl">Total</div><div class="preview-item-val big" id="pv-total">—</div></div>
+                  <div><div class="preview-item-lbl">% of Total Stock</div><div class="preview-item-val petrol-color" id="pv-pct">—</div></div>
+                  <div><div class="preview-item-lbl">Remaining Stock</div><div class="preview-item-val" id="pv-remain">—</div></div>
+                </div>
+              </div>
+              <div id="rec-err" class="err-msg">Please fill in all required fields.</div>
+              <div class="d-flex gap-5 flex-wrap">
+                <button type="submit" class="btn btn-primary">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                  Save Purchase
+                </button>
+                <button type="button" class="btn btn-secondary" id="rec-clear">Clear</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-hd"><span class="card-title">Recent Sales</span></div>
+          <div class="tbl-wrap">
+            <table class="tbl">
+              <thead><tr><th>Date</th><th>Customer</th><th>Vehicle</th><th>Fuel</th><th>Litres</th><th>% of Stock</th><th>Price/L</th><th>Total</th><th></th></tr></thead>
+              <tbody id="rec-recent"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- MONTHLY REPORT -->
+      <div id="page-monthly" class="page">
+        <div class="ph">
+          <div>
+            <div class="ph-title">Monthly Report</div>
+            <div class="ph-sub">Fuel, revenue and customer breakdown by month</div>
+          </div>
+          <div class="ph-right">
+            <div class="period-sel">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <select id="m-month"></select>
+              <select id="m-year"></select>
+            </div>
+            <button class="btn btn-secondary btn-sm" id="exp-monthly-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="icon-xs"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Excel
+            </button>
+            <button class="btn btn-ghost btn-sm" id="exp-monthly-pdf-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="icon-xs"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+              PDF
+            </button>
+          </div>
+        </div>
+        <div class="kpi-grid" id="m-kpis"></div>
+        <div class="charts-grid">
+          <div class="card" class="m-0">
+            <div class="card-hd"><span class="card-title">Fuel Breakdown</span></div>
+            <div class="donut-wrap">
+              <div class="donut-ring"><canvas id="m-donut" width="130" height="130"></canvas>
+                <div class="donut-center"><div class="donut-val" id="m-dval">—</div><div class="donut-lbl">Total Litres</div></div>
+              </div>
+              <div class="donut-legend" id="m-dleg"></div>
+            </div>
+          </div>
+          <div class="card" class="m-0">
+            <div class="card-hd"><span class="card-title">Daily Trend</span></div>
+            <div class="card-body" class="pt-5"><div class="chart-box"><canvas id="m-trend"></canvas></div></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-hd"><span class="card-title">All Purchases This Month</span></div>
+          <div class="tbl-wrap">
+            <table class="tbl">
+              <thead><tr><th>Date</th><th>Customer</th><th>Vehicle</th><th>Fuel</th><th>Litres</th><th>% of Stock</th><th>Price/L</th><th>Total</th><th></th></tr></thead>
+              <tbody id="m-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-hd"><span class="card-title">Customer Summary</span></div>
+          <div class="tbl-wrap">
+            <table class="tbl">
+              <thead><tr><th>Customer</th><th>Vehicle</th><th>Petrol (L)</th><th>Petrol %</th><th>Diesel (L)</th><th>Diesel %</th><th>Total (L)</th><th>Revenue</th><th>Visits</th></tr></thead>
+              <tbody id="m-csumm"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- YEARLY REPORT -->
+      <div id="page-yearly" class="page">
+        <div class="ph">
+          <div>
+            <div class="ph-title">Yearly Report</div>
+            <div class="ph-sub">Full-year fuel performance and revenue analysis</div>
+          </div>
+          <div class="ph-right">
+            <div class="period-sel">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C12 2 5 9 5 14a7 7 0 0 0 14 0c0-5-7-12-7-12z"/></svg>
+              <select id="y-year"></select>
+            </div>
+            <button class="btn btn-secondary btn-sm" id="exp-yearly-btn">Export</button>
+            <button class="btn btn-ghost btn-sm" onclick="window.print()">Print</button>
+          </div>
+        </div>
+        <div class="kpi-grid" id="y-kpis"></div>
+        <div class="card">
+          <div class="card-hd"><span class="card-title">Monthly Revenue</span></div>
+          <div class="card-body" class="pt-5"><div class="chart-box" style="height:210px"><canvas id="y-chart"></canvas></div></div>
+        </div>
+        <!-- Year-over-Year Comparison -->
+        <div class="card">
+          <div class="card-hd" class="flex-wrap gap-5">
+            <div>
+              <span class="card-title">Year-over-Year Comparison</span>
+              <div class="card-subtitle" id="yoy-subtitle">Compare revenue and fuel volume across two years</div>
+            </div>
+            <div class="d-flex align-center gap-5 ml-auto">
+              <span style="font-size:.72rem;color:var(--t4);font-weight:500">Compare</span>
+              <select id="y-compare-year" class="form-input" style="width:auto;padding:.3rem .6rem;font-size:.78rem">
+                <option value="">— select year —</option>
+              </select>
+              <div class="d-flex align-center gap-35">
+                <span style="width:10px;height:10px;border-radius:2px;background:#F97316;display:inline-block"></span>
+                <span style="font-size:.7rem;color:var(--t3)" id="yoy-label-a">Selected year</span>
+                <span style="width:10px;height:10px;border-radius:2px;background:#6366F1;display:inline-block;margin-left:.5rem"></span>
+                <span style="font-size:.7rem;color:var(--t3)" id="yoy-label-b">Compare year</span>
+              </div>
+            </div>
+          </div>
+          <div class="card-body" class="pt-5">
+            <div id="yoy-empty" class="text-center-empty">Select a comparison year above to see year-over-year trends</div>
+            <div id="yoy-charts" style="display:none">
+              <div style="margin-bottom:.5rem;font-size:.72rem;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.05em">Revenue (Monthly)</div>
+              <div class="chart-box" style="height:200px;margin-bottom:1.25rem"><canvas id="yoy-rev-chart"></canvas></div>
+              <div style="margin-bottom:.5rem;font-size:.72rem;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.05em">Fuel Volume — Litres (Monthly)</div>
+              <div class="chart-box" style="height:200px;margin-bottom:1.25rem"><canvas id="yoy-vol-chart"></canvas></div>
+              <!-- YoY summary table -->
+              <div class="overflow-x">
+                <table class="tbl">
+                  <thead><tr><th>Metric</th><th id="yoy-th-a">Year A</th><th id="yoy-th-b">Year B</th><th>Change</th></tr></thead>
+                  <tbody id="yoy-summary-tbody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-hd"><span class="card-title">Month-by-Month</span></div>
+          <div class="tbl-wrap">
+            <table class="tbl">
+              <thead><tr><th>Month</th><th>Petrol (L)</th><th>Petrol %</th><th>Diesel (L)</th><th>Diesel %</th><th>Total (L)</th><th>Revenue</th><th>Transactions</th></tr></thead>
+              <tbody id="y-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- HISTORY -->
+      <div id="page-history" class="page">
+        <div class="ph">
+          <div>
+            <div class="ph-title">Purchase History</div>
+            <div class="ph-sub">Complete transaction log with search and filters</div>
+          </div>
+          <div class="ph-right">
+            <button class="btn btn-secondary btn-sm" id="exp-hist-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="icon-xs"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Excel
+            </button>
+            <button class="btn btn-ghost btn-sm" id="exp-hist-pdf-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="icon-xs"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+              PDF
+            </button>
+          </div>
+        </div>
+        <div class="filter-row">
+          <div class="search-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="search" class="form-input" id="h-q" placeholder="Search customer, vehicle…"/>
+          </div>
+          <select class="filter-select" id="h-fuel"><option value="">All Fuel</option><option value="Petrol">Petrol</option><option value="Diesel">Diesel</option></select>
+          <select class="filter-select" id="h-month"></select>
+          <div class="date-range" class="flex-shrink0">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <input type="date" id="h-from" style="width:110px"/>
+            <span>–</span>
+            <input type="date" id="h-to" style="width:110px"/>
+          </div>
+          <button class="btn btn-ghost btn-sm" id="h-reset">Reset</button>
+        </div>
+        <div class="card" class="mb-0">
+          <div class="tbl-wrap">
+            <table class="tbl">
+              <thead><tr><th>Date</th><th>Customer</th><th>Vehicle</th><th>Phone</th><th>Fuel</th><th>Litres</th><th>% of Stock</th><th>Price/L</th><th>Total</th><th>Notes</th><th></th></tr></thead>
+              <tbody id="h-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="pager" id="h-pager"></div>
+      </div>
+
+      <!-- AUDIT LOG -->
+      <div id="page-audit" class="page">
+        <div class="ph">
+          <div>
+            <div class="ph-title">Audit Log</div>
+            <div class="ph-sub">Complete record of all system activities and changes</div>
+          </div>
+          <div class="ph-right">
+            <button class="btn btn-secondary btn-sm" id="exp-audit-btn">Export</button>
+            <button class="btn btn-danger btn-sm" id="clear-audit-btn">Clear Log</button>
+          </div>
+        </div>
+        <div class="filter-row">
+          <div class="search-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="search" class="form-input" id="al-q" placeholder="Search actions, users…"/>
+          </div>
+          <select class="filter-select" id="al-type">
+            <option value="">All Types</option>
+            <option value="login">Login</option>
+            <option value="create">Create</option>
+            <option value="edit">Edit</option>
+            <option value="delete">Delete</option>
+            <option value="settings">Settings</option>
+          </select>
+          <button class="btn btn-ghost btn-sm" id="al-reset">Reset</button>
+        </div>
+        <div class="card" class="mb-0">
+          <div class="card-body" style="padding:.25rem 1.1rem" id="audit-list"></div>
+        </div>
+        <div class="pager" id="al-pager"></div>
+      </div>
+
+      <!-- SETTINGS -->
+      <div id="page-settings" class="page">
+        <div class="ph">
+          <div>
+            <div class="ph-title">Settings</div>
+            <div class="ph-sub">Manage your account, security and preferences</div>
+          </div>
+        </div>
+        <div class="stabs" id="stabs">
+          <button class="stab active" data-stab="profile">Profile</button>
+          <button class="stab" data-stab="security">Security</button>
+          <button class="stab" data-stab="prefs">Preferences</button>
+          <button class="stab" data-stab="users" id="stab-users-btn">Users</button>
+          <button class="stab" data-stab="sms">SMS Notifications</button>
+          <button class="stab admin-only" data-stab="data">Data &amp; Backup</button>
+        </div>
+        <div class="spane active" id="sp-profile">
+          <div class="card" style="max-width:620px">
+            <div class="card-hd"><span class="card-title">Profile Information</span></div>
+            <div class="card-body">
+              <!-- Avatar upload -->
+              <div class="avatar-upload-wrap">
+                <div class="avatar-preview" id="av-preview-wrap">
+                  <div class="avatar-preview-placeholder" id="av-placeholder" style="background:var(--brand)">EM</div>
+                </div>
+                <div class="avatar-upload-info">
+                  <div class="avatar-upload-name" id="av-name-label">Your Profile Picture</div>
+                  <div class="avatar-upload-hint">JPG, PNG or GIF · Max 4 MB · Displayed everywhere in the app</div>
+                  <div class="avatar-upload-btns">
+                    <button type="button" class="btn btn-primary btn-sm" id="upload-av-btn">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                      Upload Photo
+                    </button>
+                    <button type="button" class="btn btn-secondary btn-sm" id="camera-av-btn">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                      Take Photo
+                    </button>
+                    <button type="button" class="btn btn-ghost btn-sm" id="remove-av-btn" class="c-danger">Remove</button>
+                  </div>
+                  <input type="file" id="av-file-input" accept="image/*" style="display:none"/>
+                </div>
+              </div>
+              <!-- Name + Username -->
+              <div class="fg" class="mb-1">
+                <div>
+                  <label class="form-label">Display Name</label>
+                  <input class="form-input" id="s-display" type="text" placeholder="Your display name"/>
+                </div>
+                <div>
+                  <label class="form-label">Username</label>
+                  <input class="form-input" id="s-username" type="text" placeholder="Login username"/>
+                </div>
+              </div>
+              <button class="btn btn-primary" id="save-profile-btn">Save Profile</button>
+            </div>
+          </div>
+        </div>
+        <div class="spane" id="sp-security">
+          <div class="card" style="max-width:420px">
+            <div class="card-hd"><span class="card-title">Change Password</span></div>
+            <div class="card-body">
+              <div class="form-field">
+                <label class="form-label">Current Password</label>
+                <input class="form-input" id="s-old" type="password" placeholder="Enter current password"/>
+              </div>
+              <div class="form-field">
+                <label class="form-label">New Password</label>
+                <input class="form-input" id="s-new" type="password" placeholder="Min. 6 characters"/>
+              </div>
+              <div class="form-field">
+                <label class="form-label">Confirm New Password</label>
+                <input class="form-input" id="s-cnf" type="password" placeholder="Repeat new password"/>
+              </div>
+              <div id="s-perr" class="err-msg"></div>
+              <button class="btn btn-primary" id="save-pass-btn">Update Password</button>
+            </div>
+          </div>
+        </div>
+        <div class="spane" id="sp-prefs">
+          <div class="card" style="max-width:700px">
+            <div class="card-hd"><span class="card-title">Regional Preferences</span></div>
+            <div class="card-body">
+              <div class="fg" class="mb-1">
+                <div>
+                  <label class="form-label">Currency</label>
+                  <select class="form-input" id="s-cur">
+                    <option value="GHS">GHS — Ghana Cedi (₵)</option>
+                    <option value="USD">USD — US Dollar ($)</option>
+                    <option value="EUR">EUR — Euro (€)</option>
+                    <option value="GBP">GBP — British Pound (£)</option>
+                    <option value="NGN">NGN — Nigerian Naira (₦)</option>
+                    <option value="KES">KES — Kenyan Shilling (KSh)</option>
+                    <option value="ZAR">ZAR — South African Rand (R)</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="form-label">Country</label>
+                  <select class="form-input" id="s-country">
+                    <option value="GH">Ghana</option><option value="NG">Nigeria</option>
+                    <option value="KE">Kenya</option><option value="ZA">South Africa</option>
+                    <option value="US">United States</option><option value="GB">United Kingdom</option>
+                    <option value="DE">Germany</option><option value="FR">France</option>
+                    <option value="OTHER">Other</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="form-label">Language</label>
+                  <select class="form-input" id="s-lang">
+                    <option value="en">English</option><option value="fr">Français</option>
+                    <option value="de">Deutsch</option><option value="es">Español</option>
+                    <option value="pt">Português</option><option value="tw">Twi (Ghana)</option>
+                    <option value="yo">Yoruba</option><option value="ha">Hausa</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="form-label">Date Format</label>
+                  <select class="form-input" id="s-dfmt">
+                    <option value="DD/MM/YYYY">DD/MM/YYYY</option>
+                    <option value="MM/DD/YYYY">MM/DD/YYYY</option>
+                    <option value="YYYY-MM-DD">YYYY-MM-DD</option>
+                  </select>
+                </div>
+              </div>
+              <button class="btn btn-primary" id="save-prefs-btn">Save Preferences</button>
+            </div>
+          </div>
+          <div class="card admin-only" style="max-width:700px;margin-top:1rem">
+            <div class="card-hd"><span class="card-title">Low Stock Alert Thresholds</span><span class="card-subtitle" style="font-size:.72rem;color:var(--t4);margin-left:.5rem">Admin only</span></div>
+            <div class="card-body">
+              <p style="font-size:.78rem;color:var(--t3);margin-bottom:1rem;line-height:1.6">Set the minimum litres remaining that triggers a low-stock notification. Leave at 0 to disable.</p>
+              <div class="fg" class="mb-1">
+                <div>
+                  <label class="form-label">Petrol Alert Threshold (L)</label>
+                  <input class="form-input" type="number" min="0" step="1" id="s-petrol-threshold" placeholder="e.g. 500"/>
+                </div>
+                <div>
+                  <label class="form-label">Diesel Alert Threshold (L)</label>
+                  <input class="form-input" type="number" min="0" step="1" id="s-diesel-threshold" placeholder="e.g. 300"/>
+                </div>
+              </div>
+              <button class="btn btn-primary" id="save-thresholds-btn">Save Thresholds</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        <div class="spane" id="sp-sms">
+          <div class="card" style="max-width:700px">
+            <div class="card-hd">
+              <div>
+                <div class="card-title">SMS Notifications</div>
+                <div class="card-subtitle">Powered by Hubtel — Ghana&#39;s leading SMS platform</div>
+              </div>
+              <span class="badge" id="sms-status-badge" style="background:var(--surface-3);color:var(--t3);border:1px solid var(--border)">Disabled</span>
+            </div>
+            <div class="card-body">
+
+              <!-- Hubtel logo strip -->
+              <div style="display:flex;align-items:center;gap:.75rem;padding:.75rem 1rem;background:linear-gradient(135deg,#0D47A1 0%,#1565C0 100%);border-radius:var(--radius-md);margin-bottom:1.1rem">
+                <div style="width:36px;height:36px;background:#fff;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#0D47A1" stroke-width="2.5" stroke-linecap="round" class="icon-md"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.56a16 16 0 0 0 6.29 6.29l1.62-1.88a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                </div>
+                <div>
+                  <div style="font-size:.8rem;font-weight:700;color:#fff;letter-spacing:-.02em">Hubtel SMS</div>
+                  <div style="font-size:.68rem;color:rgba(255,255,255,.65)">Ghana-focused · Supports MTN, Vodafone, AirtelTigo &amp; more</div>
+                </div>
+                <div style="margin-left:auto;font-size:.68rem;color:rgba(255,255,255,.5)">hubtel.com</div>
+              </div>
+
+              <!-- API credentials -->
+              <div class="section-label">API Credentials</div>
+              <div class="fg" class="mb-1">
+                <div>
+                  <label class="form-label">Client ID</label>
+                  <input class="form-input" id="sms-api-user" placeholder="Your Hubtel Client ID"/>
+                </div>
+                <div>
+                  <label class="form-label">Client Secret</label>
+                  <input class="form-input" type="password" id="sms-api-key" placeholder="Your Hubtel Client Secret"/>
+                </div>
+                <div>
+                  <label class="form-label">Sender ID</label>
+                  <input class="form-input" id="sms-sender" placeholder="e.g. FuelStation (max 11 chars)"/>
+                </div>
+                <div>
+                  <label class="form-label">Admin Phone Number</label>
+                  <input class="form-input" id="sms-phone" placeholder="e.g. 0244123456 or +233244123456"/>
+                </div>
+              </div>
+
+              <div class="divider"></div>
+
+              <!-- Notification toggles -->
+              <div class="section-label">Notify Me When&hellip;</div>
+              <div class="sms-toggle-row">
+                <div>
+                  <div class="sms-toggle-label">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:13px;height:13px;display:inline;margin-right:.35rem;color:var(--brand)"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                    New Sale Recorded
+                  </div>
+                  <div class="sms-toggle-desc">Get an SMS for every fuel purchase logged in the system</div>
+                </div>
+                <label class="toggle-switch"><input type="checkbox" id="sms-t-sale" checked/><span class="toggle-slider"></span></label>
+              </div>
+              <div class="sms-toggle-row">
+                <div>
+                  <div class="sms-toggle-label">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:13px;height:13px;display:inline;margin-right:.35rem;color:var(--warn)"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                    Low Fuel Stock Warning
+                  </div>
+                  <div class="sms-toggle-desc">Alert when Petrol or Diesel drops below 300 litres</div>
+                </div>
+                <label class="toggle-switch"><input type="checkbox" id="sms-t-low" checked/><span class="toggle-slider"></span></label>
+              </div>
+              <div class="sms-toggle-row">
+                <div>
+                  <div class="sms-toggle-label">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:13px;height:13px;display:inline;margin-right:.35rem;color:var(--info)"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    New User Registered
+                  </div>
+                  <div class="sms-toggle-desc">Alert when a new account is created on the system</div>
+                </div>
+                <label class="toggle-switch"><input type="checkbox" id="sms-t-user" checked/><span class="toggle-slider"></span></label>
+              </div>
+
+              <div class="divider"></div>
+
+              <!-- Master toggle + actions -->
+              <div class="sms-toggle-row" style="background:var(--brand-lt);border-color:var(--brand-lt2)">
+                <div>
+                  <div class="sms-toggle-label" style="color:var(--brand-dk)">Enable SMS Notifications</div>
+                  <div class="sms-toggle-desc">Master switch — turns all Hubtel SMS alerts on or off</div>
+                </div>
+                <label class="toggle-switch"><input type="checkbox" id="sms-master"/><span class="toggle-slider"></span></label>
+              </div>
+
+              <div class="d-flex gap-5 flex-wrap align-center mt-1">
+                <button class="btn btn-primary" id="save-sms-btn">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                  Save Settings
+                </button>
+                <button class="btn btn-secondary btn-sm" id="test-sms-btn">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.56a16 16 0 0 0 6.29 6.29l1.62-1.88a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                  Send Test SMS
+                </button>
+                <div class="sms-result" id="sms-result"></div>
+              </div>
+
+              <!-- Setup guide -->
+              <div style="margin-top:1.1rem;padding:.9rem 1rem;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-md)">
+                <div class="d-flex align-center gap-5 mb-65">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:14px;height:14px;color:var(--brand);flex-shrink:0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                  <span style="font-size:.72rem;font-weight:700;color:var(--t2);text-transform:uppercase;letter-spacing:.05em">How to set up Hubtel SMS</span>
+                </div>
+                <div style="font-size:.76rem;color:var(--t3);line-height:1.85">
+                  <div class="mb-3">&#49;&#65039;&#8419; Go to <strong style="color:var(--brand)">hubtel.com</strong> and create a Business account</div>
+                  <div class="mb-3">&#50;&#65039;&#8419; Navigate to <strong>SMS &rarr; API Access</strong> and generate your <strong>Client ID</strong> &amp; <strong>Client Secret</strong></div>
+                  <div class="mb-3">&#51;&#65039;&#8419; Register a <strong>Sender ID</strong> (your station name, e.g. <em>FuelStation</em>) — takes 1–2 business days to approve</div>
+                  <div class="mb-3">&#52;&#65039;&#8419; Top up your Hubtel wallet with GHS to send messages</div>
+                  <div>&#53;&#65039;&#8419; Paste your credentials above, enter your phone number, save &amp; send a test SMS to confirm it works</div>
+                </div>
+                <div class="warn-note">
+                  &#9888;&#65039; SMS sending requires a backend proxy in production due to browser CORS restrictions. Use the <strong>sandbox</strong> mode on hubtel.com for local testing.
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="spane" id="sp-users">
+          <div class="card">
+            <div class="card-hd">
+              <div><div class="card-title">User Accounts</div><div class="card-subtitle">Manage who can access this system</div></div>
+              <button class="btn btn-primary btn-sm" id="add-user-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                Add User
+              </button>
+            </div>
+            <div class="tbl-wrap">
+              <table class="tbl">
+                <thead><tr><th>User</th><th>Username</th><th>Role</th><th>Created</th><th>Actions</th></tr></thead>
+                <tbody id="users-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="spane" id="sp-data">
+          <div class="card" style="max-width:620px">
+            <div class="card-hd">
+              <div><div class="card-title">Full Database Backup</div><div class="card-subtitle">Export all data as a multi-sheet Excel file</div></div>
+            </div>
+            <div class="card-body">
+              <p style="font-size:.82rem;color:var(--t3);margin-bottom:1.25rem;line-height:1.6;">This will export <strong>all</strong> data — customers, purchases, inventory deliveries, audit log and preferences — into a single Excel workbook with one sheet per category.</p>
+              <div class="grid-2 mb-125">
+                <div class="stat-box">
+                  <div class="stat-lbl">Customers</div>
+                  <div class="stat-val" id="bk-cust-count">—</div>
+                </div>
+                <div class="stat-box">
+                  <div class="stat-lbl">Purchases</div>
+                  <div class="stat-val" id="bk-purch-count">—</div>
+                </div>
+                <div class="stat-box">
+                  <div class="stat-lbl">Deliveries</div>
+                  <div class="stat-val" id="bk-del-count">—</div>
+                </div>
+                <div class="stat-box">
+                  <div class="stat-lbl">Audit Entries</div>
+                  <div class="stat-val" id="bk-audit-count">—</div>
+                </div>
+              </div>
+              <!-- Last backup info -->
+              <div id="bk-last-wrap" style="display:none;background:var(--success-bg);border:1px solid #bbf7d0;border-radius:var(--radius-sm);padding:.65rem .9rem;margin-bottom:1rem;font-size:.78rem;color:var(--t2)">
+                <span style="font-weight:600;color:var(--success)">✓ Last backup:</span> <span id="bk-last-time">—</span>
+              </div>
+              <button class="btn btn-primary" id="export-backup-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="icon-sm"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Download Full Backup (.xlsx)
+              </button>
+            </div>
+          </div>
+
+          <!-- Auto-Backup Schedule -->
+          <div class="card" style="max-width:620px;margin-top:1rem">
+            <div class="card-hd">
+              <div><div class="card-title">Automatic Backup Schedule</div><div class="card-subtitle">App auto-downloads a backup on your chosen schedule when open</div></div>
+              <span id="bk-schedule-badge" style="font-size:.68rem;font-weight:600;padding:.2rem .55rem;border-radius:99px;background:var(--surface-3);color:var(--t4);border:1px solid var(--border)">Off</span>
+            </div>
+            <div class="card-body">
+              <div class="fg" class="mb-1">
+                <div>
+                  <label class="form-label">Frequency</label>
+                  <select class="form-input" id="bk-freq">
+                    <option value="off">Disabled</option>
+                    <option value="daily">Daily</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="monthly">Monthly (1st of month)</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="form-label">Time of day</label>
+                  <input class="form-input" type="time" id="bk-time" value="08:00"/>
+                </div>
+              </div>
+              <div id="bk-next-wrap" style="display:none;background:var(--info-bg);border:1px solid var(--info-bdr);border-radius:var(--radius-sm);padding:.65rem .9rem;margin-bottom:1rem;font-size:.78rem;color:var(--t2)">
+                <span style="font-weight:600;color:var(--info)">⏰ Next backup:</span> <span id="bk-next-time">—</span>
+              </div>
+              <button class="btn btn-primary" id="save-schedule-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="icon-sm"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v14a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                Save Schedule
+              </button>
+            </div>
+          </div>
+        </div>
+
+    </div><!-- /page-wrap -->
+  </main>
+</div>
+
+<!-- ══════════════════ MODALS ══════════════════ -->
+
+<!-- Debt / Credit Payment Modal -->
+<div id="m-payment" class="modal-bg" style="display:none">
+  <div class="modal" style="max-width:420px">
+    <div class="modal-hd">
+      <span class="modal-hd-title" id="mp-pay-title">Record Payment</span>
+      <div class="modal-close" onclick="A.closeModal('m-payment')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="pay-cid"/>
+      <div id="pay-balance-info" class="mb-1"></div>
+      <div class="grid-2 mb-75">
+        <div>
+          <label class="form-label">Type</label>
+          <select class="form-input" id="pay-type">
+            <option value="payment">Payment Received</option>
+            <option value="credit">Add Credit</option>
+            <option value="debt">Add Debt</option>
+          </select>
+        </div>
+        <div>
+          <label class="form-label">Amount</label>
+          <input class="form-input" type="number" min="0" step="0.01" id="pay-amount" placeholder="0.00"/>
+        </div>
+      </div>
+      <div class="mb-75">
+        <label class="form-label">Note (optional)</label>
+        <input class="form-input" type="text" id="pay-note" placeholder="e.g. Cash payment, Bank transfer…"/>
+      </div>
+      <div id="pay-err" class="err-msg">Please enter a valid amount.</div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-secondary" onclick="A.closeModal('m-payment')">Cancel</button>
+      <button class="btn btn-primary" id="save-payment-btn">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- Customer Form -->
+<div id="m-cust" class="modal-bg" style="display:none">
+  <div class="modal">
+    <div class="modal-hd">
+      <span class="modal-hd-title" id="mc-title">Add Customer</span>
+      <div class="modal-close" onclick="A.closeModal('m-cust')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+    </div>
+    <div class="modal-body">
+      <form id="cust-form" novalidate>
+        <input type="hidden" id="cf-id"/>
+        <div class="fg" class="mb-75">
+          <div><label class="form-label">Full Name *</label><input class="form-input" type="text" id="cf-name" placeholder="e.g. Kwame Asante"/></div>
+          <div><label class="form-label">Vehicle Number *</label><input class="form-input" type="text" id="cf-car" placeholder="e.g. GH-1234-22"/></div>
+          <div><label class="form-label">Phone *</label><input class="form-input" type="tel" id="cf-phone" placeholder="e.g. 0244123456"/></div>
+          <div><label class="form-label">Email</label><input class="form-input" type="email" id="cf-email" placeholder="Optional"/></div>
+        </div>
+        <div class="mb-75"><label class="form-label">Address</label><input class="form-input" type="text" id="cf-addr" placeholder="Optional"/></div>
+        <div id="cf-err" class="err-msg">Please fill in all required fields.</div>
+      </form>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-secondary" onclick="A.closeModal('m-cust')">Cancel</button>
+      <button class="btn btn-primary" id="save-cust-btn">Save Customer</button>
+    </div>
+  </div>
+</div>
+
+<!-- Profile View -->
+<div id="m-profile" class="modal-bg" style="display:none">
+  <div class="modal wide">
+    <div class="modal-hd">
+      <span class="modal-hd-title" id="mp-title">Customer Profile</span>
+      <div class="modal-close" onclick="A.closeModal('m-profile')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+    </div>
+    <div class="modal-body" id="mp-body"></div>
+  </div>
+</div>
+
+<!-- Receipt -->
+<div id="m-receipt" class="modal-bg" style="display:none">
+  <div class="modal" style="max-width:420px">
+    <div class="modal-hd">
+      <span class="modal-hd-title">Transaction Receipt</span>
+      <div class="modal-close" onclick="A.closeModal('m-receipt')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+    </div>
+    <div class="modal-body" id="receipt-content"></div>
+    <div class="modal-foot">
+      <button class="btn btn-secondary" onclick="A.closeModal('m-receipt')">Close</button>
+      <button class="btn btn-ghost btn-sm" onclick="A.printReceipt()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:13px;height:13px;margin-right:4px;vertical-align:-1px"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        Print
+      </button>
+      <button class="btn btn-primary btn-sm" onclick="A.dlReceiptPDF()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:13px;height:13px;margin-right:4px;vertical-align:-1px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download PDF
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Purchase -->
+<div id="m-ep" class="modal-bg" style="display:none">
+  <div class="modal">
+    <div class="modal-hd">
+      <span class="modal-hd-title">Edit Purchase</span>
+      <div class="modal-close" onclick="A.closeModal('m-ep')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="ep-id"/>
+      <div class="fg" class="mb-75">
+        <div><label class="form-label">Date</label><input class="form-input" type="date" id="ep-date"/></div>
+        <div><label class="form-label">Litres</label><input class="form-input" type="number" id="ep-litres" min="0.01" step="0.01"/></div>
+        <div><label class="form-label">Price / Litre</label><input class="form-input" type="number" id="ep-ppl" min="0.01" step="0.01"/></div>
+        <div><label class="form-label">Total</label><input class="form-input" id="ep-total" readonly/></div>
+      </div>
+      <div><label class="form-label">Notes</label><textarea class="form-input" id="ep-notes" rows="2"></textarea></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-secondary" onclick="A.closeModal('m-ep')">Cancel</button>
+      <button class="btn btn-primary" id="save-ep-btn">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- Inventory Delivery -->
+<div id="m-inv" class="modal-bg" style="display:none">
+  <div class="modal">
+    <div class="modal-hd">
+      <span class="modal-hd-title">Add Fuel Delivery</span>
+      <div class="modal-close" onclick="A.closeModal('m-inv')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+    </div>
+    <div class="modal-body">
+      <div class="fg" class="mb-75">
+        <div>
+          <label class="form-label">Fuel Type *</label>
+          <select class="form-input" id="inv-fuel"><option value="Petrol">Petrol</option><option value="Diesel">Diesel</option></select>
+        </div>
+        <div><label class="form-label">Litres *</label><input class="form-input" type="number" id="inv-litres" min="1" step="0.1" placeholder="e.g. 5000"/></div>
+        <div><label class="form-label">Delivery Date *</label><input class="form-input" type="date" id="inv-date"/></div>
+        <div><label class="form-label">Supplier</label><input class="form-input" type="text" id="inv-supplier" placeholder="e.g. GOIL, Shell"/></div>
+      </div>
+      <div class="mb-75"><label class="form-label">Notes</label><textarea class="form-input" id="inv-notes" rows="2"></textarea></div>
+      <div id="inv-err" class="err-msg">Please fill in all required fields.</div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-secondary" onclick="A.closeModal('m-inv')">Cancel</button>
+      <button class="btn btn-primary" id="save-inv-btn">Add to Inventory</button>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Confirm -->
+<div id="m-del" class="modal-bg" style="display:none">
+  <div class="modal" style="max-width:380px">
+    <div class="modal-hd">
+      <span class="modal-hd-title" class="c-danger">Confirm Delete</span>
+      <div class="modal-close" onclick="A.closeModal('m-del')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+    </div>
+    <div class="modal-body"><p id="del-msg" style="font-size:.83rem;color:var(--t2);line-height:1.6"></p></div>
+    <div class="modal-foot">
+      <button class="btn btn-secondary" onclick="A.closeModal('m-del')">Cancel</button>
+      <button class="btn btn-danger" id="del-ok">Delete</button>
+    </div>
+  </div>
+</div>
+
+<!-- Camera Modal -->
+<div id="m-camera" class="modal-bg" style="display:none">
+  <div class="modal" style="max-width:420px">
+    <div class="modal-hd">
+      <span class="modal-hd-title" id="cam-title">Take Profile Photo</span>
+      <div class="modal-close" onclick="A.closeCamera()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+    </div>
+    <div class="modal-body">
+      <div id="cam-live-view">
+        <div class="camera-wrap">
+          <video id="cam-video" autoplay playsinline muted></video>
+          <canvas id="cam-canvas"></canvas>
+          <div class="camera-overlay"><div class="camera-ring"></div></div>
+        </div>
+        <div class="camera-actions">
+          <button class="btn btn-secondary btn-sm" id="cam-flip-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.13"/></svg>
+            Flip
+          </button>
+          <button class="shutter-btn" id="cam-snap-btn" title="Take photo"></button>
+          <button class="btn btn-secondary btn-sm" onclick="A.closeCamera()">Cancel</button>
+        </div>
+      </div>
+      <div id="cam-preview-view" style="display:none">
+        <img class="preview-captured" id="cam-preview-img" src="" alt="Preview"/>
+        <div class="camera-actions" class="mt-85">
+          <button class="btn btn-secondary btn-sm" id="cam-retake-btn">Retake</button>
+          <button class="btn btn-primary" id="cam-use-btn">Use This Photo</button>
+        </div>
+      </div>
+      <div id="cam-error" style="display:none;text-align:center;padding:2rem;color:var(--t3)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" style="width:48px;height:48px;margin:0 auto .75rem;color:var(--t5)"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        <div style="font-size:.82rem;font-weight:600;margin-bottom:.4rem">Camera not available</div>
+        <div style="font-size:.75rem">Please allow camera access or upload a photo instead.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit User Modal -->
+<div id="m-eu" class="modal-bg" style="display:none">
+  <div class="modal" style="max-width:420px">
+    <div class="modal-hd">
+      <span class="modal-hd-title" id="eu-title">Edit User</span>
+      <div class="modal-close" onclick="A.closeModal('m-eu')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="eu-orig"/>
+      <div class="form-field">
+        <label class="form-label">Full Name</label>
+        <input class="form-input" type="text" id="eu-display" placeholder="Display name"/>
+      </div>
+      <div class="form-field">
+        <label class="form-label">Username</label>
+        <input class="form-input" type="text" id="eu-username" placeholder="Login username"/>
+      </div>
+      <div class="form-field">
+        <label class="form-label">Role</label>
+        <div class="role-cards">
+          <div class="role-card selected" data-eurole="staff" id="eu-role-staff">
+            <div class="role-card-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:13px;height:13px;vertical-align:-2px;margin-right:4px"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Staff</div>
+            <div class="role-card-desc">Record sales, view reports</div>
+          </div>
+          <div class="role-card" data-eurole="admin" id="eu-role-admin">
+            <div class="role-card-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:13px;height:13px;vertical-align:-2px;margin-right:4px"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Admin</div>
+            <div class="role-card-desc">Full access + manage users</div>
+          </div>
+        </div>
+        <input type="hidden" id="eu-role" value="staff"/>
+      </div>
+      <div class="form-field">
+        <label class="form-label">New Password <span style="color:var(--t4);font-weight:400;text-transform:none;letter-spacing:0">(leave blank to keep current)</span></label>
+        <input class="form-input" type="password" id="eu-pwd" placeholder="Enter new password"/>
+      </div>
+      <div id="eu-err" class="err-msg"></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-secondary" onclick="A.closeModal('m-eu')">Cancel</button>
+      <button class="btn btn-primary" id="save-eu-btn">Save Changes</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"><div class="toast-dot"></div><span id="toast-msg">Saved</span></div>
+
+<!-- GUARANTEED LOADING FALLBACK: hides overlay even if Firebase/module crashes -->
+<script>
+(function(){
+  // Hard timeout: no matter what, hide loading overlay after 10s
+  var _forceHide = setTimeout(function(){
+    var el = document.getElementById('loading-overlay');
+    if(el) el.style.display = 'none';
+    var app = document.getElementById('app');
+    var login = document.getElementById('login-screen');
+    if(app && app.style.display === 'none' && login){
+      login.style.display = '';
+    }
+  }, 10000);
+  window.__clearForceHide = function(){ clearTimeout(_forceHide); };
+
+  // Catch any uncaught JS errors (including module import failures)
+  window.addEventListener('error', function(e){
+    console.error('App error:', e.message);
+    var errEl = document.getElementById('loading-error');
+    if(errEl){ errEl.textContent = 'Error: ' + e.message + '. Check your internet connection and refresh.'; errEl.style.display='block'; }
+    setTimeout(function(){
+      var el = document.getElementById('loading-overlay');
+      if(el && el.style.display !== 'none'){
+        el.style.display = 'none';
+        var login = document.getElementById('login-screen');
+        if(login) login.style.display = '';
+      }
+    }, 3000);
+  });
+  // Catch unhandled promise rejections (Firebase async failures)
+  window.addEventListener('unhandledrejection', function(e){
+    console.error('Unhandled rejection:', e.reason);
+  });
+})();
+</script>
+
+<script type="module" src="app.js"></script>
+<!-- ══ PWA: Service Worker + Install Banner ══ -->
+<script>
+(function(){
+  const DISMISSED_KEY = 'pwa_banner_dismissed';
+  const banner   = document.getElementById('pwa-banner');
+  const iosPanel = document.getElementById('pwa-ios');
+  let deferredPrompt = null;
+
+  // Detect iOS Safari specifically (not Chrome on iOS)
+  const ua = navigator.userAgent;
+  const isIOS = /iphone|ipad|ipod/i.test(ua) && !/crios|fxios/i.test(ua);
+  const isSafari = /^((?!chrome|android).)*safari/i.test(ua);
+  const isInStandalone = window.navigator.standalone === true
+    || window.matchMedia('(display-mode: standalone)').matches;
+
+  // Register Service Worker — force update on new version
+  if('serviceWorker' in navigator){
+    navigator.serviceWorker.register('./sw.js', { scope: '/emmanuel123/' }).then(reg => {
+      reg.addEventListener('updatefound', () => {
+        const newWorker = reg.installing;
+        newWorker.addEventListener('statechange', () => {
+          if(newWorker.state === 'activated') window.location.reload();
+        });
+      });
+    }).catch(()=>{});
+  }
+
+  // Don't show if already installed or dismissed this session
+  if(isInStandalone || sessionStorage.getItem(DISMISSED_KEY)) return;
+
+  // ── Android / Chrome / Edge: native install prompt ──
+  window.addEventListener('beforeinstallprompt', e => {
+    e.preventDefault();
+    deferredPrompt = e;
+    setTimeout(()=>{
+      banner.style.display = 'flex';
+    }, 2500);
+  });
+
+  // ── iOS Safari only: show manual instructions ──
+  if(isIOS && isSafari && !isInStandalone){
+    setTimeout(()=>{
+      iosPanel.style.display = 'block';
+    }, 2500);
+  }
+
+  // Install button
+  document.getElementById('pwa-install-btn').addEventListener('click', async () => {
+    if(!deferredPrompt) return;
+    banner.style.display = 'none';
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    deferredPrompt = null;
+    if(outcome === 'accepted') sessionStorage.setItem(DISMISSED_KEY, '1');
+  });
+
+  // Close banner
+  document.getElementById('pwa-close-btn').addEventListener('click', () => {
+    banner.style.display = 'none';
+    sessionStorage.setItem(DISMISSED_KEY, '1');
+  });
+
+  // Close iOS panel
+  document.getElementById('pwa-ios-close').addEventListener('click', () => {
+    iosPanel.style.display = 'none';
+    sessionStorage.setItem(DISMISSED_KEY, '1');
+  });
+
+  // Hide once installed
+  window.addEventListener('appinstalled', () => {
+    banner.style.display = 'none';
+    iosPanel.style.display = 'none';
+    deferredPrompt = null;
+  });
+})();
+</script>
+</body>
+</html>
