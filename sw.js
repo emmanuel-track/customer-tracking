@@ -1,9 +1,9 @@
 const CACHE = 'fuel-tracker-v3';
 const ASSETS = [
-  '/emmanuel123/',
-  '/emmanuel123/index.html',
-  '/emmanuel123/styles.css',
-  '/emmanuel123/app.js',
+  '/customer-tracking/',
+  '/customer-tracking/index.html',
+  '/customer-tracking/styles.css',
+  '/customer-tracking/app.js',
 ];
 
 // Install — cache core assets
@@ -46,7 +46,7 @@ self.addEventListener('fetch', e => {
       })
       .catch(() =>
         caches.match(e.request)
-          .then(r => r || caches.match('/emmanuel123/'))
+          .then(r => r || caches.match('/customer-tracking/'))
       )
   );
 });
